@@ -19,9 +19,9 @@
 
   (define-compiler-macro package-symbolconc (&whole form package-spec &rest frobs)
     (flet ((quoted-symbol-p (x)
-                            (and (consp x)
-                                 (eq 'quote (first x))
-                                 (symbolp (second x)))))
+             (and (consp x)
+                  (eq 'quote (first x))
+                  (symbolp (second x)))))
       (if (every (lambda (x)
                    (or (typep x '(or fixnum string character))
                        (quoted-symbol-p x)))
@@ -76,7 +76,7 @@
   (define-fixnum-only-arithmetic-function-rest -)
   (define-fixnum-only-arithmetic-function-rest *)
   (define-fixnum-only-arithmetic-function-rest /)
-  (define-fixnum-only-arithmetic-function (\\ gcd) fixnum1 fixnum2) ;renamed
+  (define-fixnum-only-arithmetic-function (\\ rem) fixnum1 fixnum2) ;renamed
   (define-fixnum-only-arithmetic-function 1+ fixnum)
   (define-fixnum-only-arithmetic-function 1- fixnum)
   (define-fixnum-only-arithmetic-function abs fixnum)
