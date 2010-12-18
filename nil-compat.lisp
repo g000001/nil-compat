@@ -4,37 +4,38 @@
 
 ;; P70
 ;; 9.6 Symbol Concatenation
-(defun package-symbolconc (package-spec &rest frobs)
-  (values
-   (intern
-    (with-output-to-string (out)
-      (dolist (elt frobs)
-        (unless (typep elt '(or symbol string fixnum character))
-          (error "The value ~A is not of type (OR SYMBOL STRING FIXNUM CHARACTER)."
-                 elt))
-        (let ((*print-base* 10.))
-          (princ elt out))))
-    package-spec)))
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defun package-symbolconc (package-spec &rest frobs)
+    (values
+     (intern
+      (with-output-to-string (out)
+        (dolist (elt frobs)
+          (unless (typep elt '(or symbol string fixnum character))
+            (error "The value ~A is not of type (OR SYMBOL STRING FIXNUM CHARACTER)."
+                   elt))
+          (let ((*print-base* 10.))
+            (princ elt out))))
+      package-spec)))
 
-(define-compiler-macro package-symbolconc (&whole form package-spec &rest frobs)
-  (flet ((quoted-symbol-p (x)
-                          (and (consp x)
-                               (eq 'quote (first x))
-                               (symbolp (second x)))))
-    (if (every (lambda (x)
-                 (or (typep x '(or fixnum string character))
-                     (quoted-symbol-p x)))
-               frobs)
-        `(package-symbolconc
-          ,package-spec
-          ,(with-output-to-string (out)
-             (dolist (elt frobs)
-               (let ((*print-base* 10.))
-                 (princ (if (quoted-symbol-p elt)
-                            (eval elt)
-                            elt)
-                        out)))))
-        form)))
+  (define-compiler-macro package-symbolconc (&whole form package-spec &rest frobs)
+    (flet ((quoted-symbol-p (x)
+                            (and (consp x)
+                                 (eq 'quote (first x))
+                                 (symbolp (second x)))))
+      (if (every (lambda (x)
+                   (or (typep x '(or fixnum string character))
+                       (quoted-symbol-p x)))
+                 frobs)
+          `(package-symbolconc
+            ,package-spec
+            ,(with-output-to-string (out)
+               (dolist (elt frobs)
+                 (let ((*print-base* 10.))
+                   (princ (if (quoted-symbol-p elt)
+                              (eval elt)
+                              elt)
+                          out)))))
+          form))))
 
 (in-package #:nil)
 
