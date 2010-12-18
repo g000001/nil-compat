@@ -3,3 +3,9 @@
 (defpackage #:nil
   (:use #:cl))
 
+(defpackage #:si
+  (:use #:cl)
+  (:export :package-symbolconc))
+
+(defpackage #:utils
+  (:use #:cl #:nil))
