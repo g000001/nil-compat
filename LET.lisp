@@ -425,7 +425,7 @@
                         ('T () )))
                                         ;Normal destructuring, e.g. (desetq (f g h) (mumble 3))
           (PAIR  () )
-          #+NIL     (CONSTANT (GO NILLS))
+          (CONSTANT (GO NILLS))
           (T (GO BAD)))
                                         ;LISTs, and some cases of SYMBOLs, fall thru to here
                                         ;Get a variable over which to destructure.
