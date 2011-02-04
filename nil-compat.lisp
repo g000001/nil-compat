@@ -1,6 +1,6 @@
 ;;;; /home/mc/lisp/work/nil-compat/nil-compat.lisp
 
-(in-package #:si)
+(in-package #:nili)
 
 ;; P70
 ;; 9.6 Symbol Concatenation
@@ -71,14 +71,15 @@
 
 ;; P202
 ;; 19.8.1.2 Merging and Defaulting
-(defvar *scratch-pathname-defaults* #p"/tmp/")
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defvar nil:*scratch-pathname-defaults* #p"/tmp/"))
 
 (in-package :utils)
 
 ;; 21.5.4 Related Utilities
 ;; P228
 (defun print-into-file (expression &optional (filename "gazonk.del"))
-  (with-open-file (out (merge-pathnames nil::*scratch-pathname-defaults*
+  (with-open-file (out (merge-pathnames nil:*scratch-pathname-defaults*
                                         filename)
                        :direction :output
                        :if-exists :append
@@ -86,7 +87,7 @@
     (print expression out)))
 
 (defun pp-into-file (expression &optional (filename "gazonk.del"))
-  (with-open-file (out (merge-pathnames nil::*scratch-pathname-defaults*
+  (with-open-file (out (merge-pathnames nil:*scratch-pathname-defaults*
                                         filename)
                        :direction :output
                        :if-exists :append

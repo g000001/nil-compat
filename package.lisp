@@ -20,10 +20,12 @@
            :^&
            :to-string
            :?format
+           :*scratch-pathname-defaults*
            ))
 
-(defpackage #:si
+(defpackage #:nil-internals
   (:use #:cl)
+  (:nicknames #:nili)
   (:export :package-symbolconc))
 
 (defpackage #:utils

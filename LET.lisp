@@ -9,7 +9,6 @@
 (in-package :si)
 
 ;;;; Temporary macros
-
 (eval-when (:compile-toplevel :execute)
 
 ;;; Leave these as defined by "macro" rather than "defmacro", so that
@@ -245,12 +244,12 @@
 ;;; Returns null if there aren't any variables in the pattern;
 ;;;    otherwise, returns variable which satisfies "|LET.matchp|".
 
-(defvar |LET.direction|)
-(declaim (fixnum |LET.direction|))
+(DEFVAR |LET.direction|)
+(DECLAIM (FIXNUM |LET.direction|))
 
-(defvar |LET.matchp|)
-(defvar |LET.direction|)
-(defvar |LET.listallvars|)
+(DEFVAR |LET.matchp|)
+(DEFVAR |LET.direction|)
+(DEFVAR |LET.listallvars|)
 
 (DEFUN |LET.match-vars| (|LET.matchp| PAT |LET.direction| |LET.listallvars|)
   (|LET.anyvarsp| PAT))
@@ -293,7 +292,6 @@
 
 
 ;;;; LET and LET* Expanders
-
 (DEFUN LET-expander-1 (L)
   (PROG (LETL LMBODY |LET.dcmp-tempvars| VARS VALS EXCEPTIONS
               GVAR DECLP DCMPL LL OK-FL ALLFLATS  NVAR NVAL)
@@ -379,7 +377,6 @@
 			  ('T (CDR LMBODY))))))))
 
 ;;;; DESETQ Expander
-
 (DEFUN DESETQ-expander-1 (LL)
   (PROG (L DCMPL GVAR GVAR-INIT ITEM PAT DS-VAR ALLFLATS VARS
            |LET.dcmp-tempvars| TMP-VAR)
@@ -474,7 +471,6 @@
      BAD (ERROR "~A Bad form to DESETQ" `(DESETQ ,pat ,item))
         ))
 
-
 
 ;;;; |LET.optimize|
 
@@ -529,7 +525,6 @@
 
 
 ;;;; Macro definitions
-
 (DEFMACRO nil:DESETQ (&REST L) (DESETQ-expander-1 L))
 
 (DEFMACRO nil:LET* (&REST L) (LET*-expander-1 L))

@@ -1,4 +1,4 @@
-(in-package :si)
+(in-package :nili)
 
 ;; types
 (deftype pair () 'cons)
@@ -14,6 +14,10 @@
 (defun memq (item list)
   (declare (list list))
   (member item list :test #'eq))
+
+(defun delq (item list)
+  (declare (list list))
+  (delete item list :test #'eq))
 
 (defun vector-length (vec)
   (declare (vector vec))
