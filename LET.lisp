@@ -6,7 +6,7 @@
 ;;; ************ THIS is a read-only file! (all writes reserved) *************
 ;;; **************************************************************************
 
-(in-package :si)
+(in-package :nili)
 
 ;;;; Temporary macros
 (eval-when (:compile-toplevel :execute)
