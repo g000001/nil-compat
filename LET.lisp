@@ -248,7 +248,6 @@
 (DECLAIM (FIXNUM |LET.direction|))
 
 (DEFVAR |LET.matchp|)
-(DEFVAR |LET.direction|)
 (DEFVAR |LET.listallvars|)
 
 (DEFUN |LET.match-vars| (|LET.matchp| PAT |LET.direction| |LET.listallvars|)
@@ -356,8 +355,7 @@
         (SETQ VARS (NRECONC VARS ALLFLATS)
               VALS (NRECONC VALS (make-list (LENGTH ALLFLATS))))
         (RETURN `((LAMBDA ,vars
-                    ,.declp
-                    ,.(nconc dcmpl lmbody))
+                    ,.(nconc dcmpl `((locally ,.declp ,@lmbody))))
                   ,.vals))))
 
 (DEFUN LET*-expander-1 (L)

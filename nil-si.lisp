@@ -46,13 +46,14 @@
 (defun package-symbolconc (package-spec &rest frobs)
   (values
    (intern
-    (with-output-to-string (out)
-      (dolist (elt frobs)
-        (unless (typep elt '(or symbol string fixnum character))
-          (error "The value ~A is not of type (OR SYMBOL STRING FIXNUM CHARACTER)."
-                 elt))
-        (let ((*print-base* 10.))
-          (princ elt out))))
+    (with-standard-io-syntax
+      (with-output-to-string (out)
+        (dolist (elt frobs)
+          (unless (typep elt '(or symbol string fixnum character))
+            (error "The value ~A is not of type (OR SYMBOL STRING FIXNUM CHARACTER)."
+                   elt))
+          (let ((*print-base* 10.))
+            (princ elt out)))))
     package-spec)))
 
 (define-compiler-macro package-symbolconc (&whole form package-spec &rest frobs)
