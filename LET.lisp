@@ -355,8 +355,7 @@
         (SETQ VARS (NRECONC VARS ALLFLATS)
               VALS (NRECONC VALS (make-list (LENGTH ALLFLATS))))
         (RETURN `((LAMBDA ,vars
-                    ,.declp
-                    ,.(nconc dcmpl lmbody))
+                    ,.(nconc dcmpl `((locally ,.declp ,@lmbody))))
                   ,.vals))))
 
 (DEFUN LET*-expander-1 (L)
