@@ -41,12 +41,21 @@
   (define-fixnum-only-arithmetic-function-rest -)
   (define-fixnum-only-arithmetic-function-rest *)
   (define-fixnum-only-arithmetic-function-rest /)
+  (define-fixnum-only-arithmetic-function-rest <)
+  (define-fixnum-only-arithmetic-function-rest >)
+  (define-fixnum-only-arithmetic-function-rest <=)
+  (define-fixnum-only-arithmetic-function-rest =)
+  (define-fixnum-only-arithmetic-function-rest /=)
+  (define-fixnum-only-arithmetic-function-rest >=)
+  (define-fixnum-only-arithmetic-function-rest logxor)
   (define-fixnum-only-arithmetic-function (\\ rem) fixnum1 fixnum2) ;renamed
   (define-fixnum-only-arithmetic-function 1+ fixnum)
   (define-fixnum-only-arithmetic-function 1- fixnum)
   (define-fixnum-only-arithmetic-function abs fixnum)
   (define-fixnum-only-arithmetic-function signum fixnum)
+  (define-fixnum-only-arithmetic-function logtest fixnum1 fixnum2)
   (define-fixnum-only-arithmetic-function (^ expt) fixnum1 fixnum2))
+
 
 ;; 13.1 String Coercion
 (defun nil:to-string (frobozz)

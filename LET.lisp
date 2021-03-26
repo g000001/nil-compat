@@ -9,7 +9,7 @@
 (in-package :nili)
 
 ;;;; Temporary macros
-(eval-when (:compile-toplevel :execute)
+(eval-when (:compile-toplevel :execute :load-toplevel)
 
 ;;; Leave these as defined by "macro" rather than "defmacro", so that
 ;;;  one has a ghost of a chance of interpreting this file.
@@ -248,7 +248,6 @@
 (DECLAIM (FIXNUM |LET.direction|))
 
 (DEFVAR |LET.matchp|)
-(DEFVAR |LET.direction|)
 (DEFVAR |LET.listallvars|)
 
 (DEFUN |LET.match-vars| (|LET.matchp| PAT |LET.direction| |LET.listallvars|)
